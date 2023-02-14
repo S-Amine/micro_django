@@ -1,0 +1,52 @@
+# Step 1: Import Erlang GPG Key
+
+sudo apt update
+sudo apt install curl software-properties-common apt-transport-https lsb-release
+curl -fsSL https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/erlang.gpg
+
+# Step 2: Add Erlang Repository to Ubuntu 22.04|20.04|18.04
+
+sudo apt update
+sudo apt install erlang
+
+echo "deb https://packages.erlang-solutions.com/ubuntu $(lsb_release -cs) contrib" | sudo tee /etc/apt/sources.list.d/erlang.list
+
+# Step 3: Install Erlang on Ubuntu 22.04|20.04|18.04
+
+sudo apt update
+sudo apt install erlang
+
+# Step 4: Add RabbitMQ Repository to Ubuntu
+
+curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.deb.sh | sudo bash
+
+# Step 5: Install RabbitMQ Server Ubuntu 22.04|20.04|18.04
+
+sudo apt update
+
+sudo apt install rabbitmq-server
+
+systemctl status rabbitmq-server.service
+
+systemctl is-enabled rabbitmq-server.service
+
+sudo systemctl enable rabbitmq-server
+
+# Step 6: Enable the RabbitMQ Management Dashboard (Optional)
+
+sudo rabbitmq-plugins enable rabbitmq_management
+
+sudo ss -tunelp | grep 15672
+
+sudo ufw allow proto tcp from any to any port 5672,15672
+
+sudo rabbitmqctl add_user admin StrongPassword
+
+sudo rabbitmqctl set_user_tags admin administrator
+
+# complete https://computingforgeeks.com/how-to-install-latest-rabbitmq-server-on-ubuntu-linux/
+
+# step 7: Add Vhost and set permission to the admin user
+
+sudo rabbitmqctl add_vhost /
+sudo rabbitmqctl set_permissions -p / admin '.*' '.*' '.*'
