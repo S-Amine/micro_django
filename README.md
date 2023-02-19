@@ -86,7 +86,7 @@ pip install -r requirements.txt
 ```
 6. In the second terminal, activate the virtual environment and run the command 
 ```bash
-./start_celery_worker.py
+./start_celery_worker.sh
 ```
 7. In the third terminal, activate the virtual environment and run the command 
 ```bash
